@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, ReactNode } from "react";
 
 type AuthContextType = {
   isAuthenticated: boolean;
@@ -23,6 +23,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
-  if (!context) throw new Error('useAuth debe estar dentro de un AuthProvider');
+  if (!context) throw new Error("useAuth debe estar dentro de un AuthProvider");
   return context;
 };

@@ -9,6 +9,9 @@
       "@/*": [
         "./*"
       ],
+      "~/*":[
+        "*"
+      ],
       "react-map-gl": ["types/react-map-gl.d.ts"]
     }
   },

@@ -1,7 +1,7 @@
 // app/index.tsx
-import { useEffect, useState } from 'react';
-import { useRouter, useRootNavigationState } from 'expo-router';
-import { ActivityIndicator, View } from 'react-native';
+import { useEffect, useState } from "react";
+import { useRouter, useRootNavigationState } from "expo-router";
+import { ActivityIndicator, View } from "react-native";
 
 export default function Index() {
   const router = useRouter();
@@ -13,13 +13,15 @@ export default function Index() {
 
     // Esperamos un momentto para mostrar splash
     setTimeout(() => {
-      router.replace('/Login');
+      router.replace("/Login");
     }, 500); // medio segundo para que se vea bonito
-
   }, [rootNavigationState?.key]);
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <View
+      style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+      className="flex flex-shrink-0"
+    >
       <ActivityIndicator size="large" color="#007BFF" />
     </View>
   );
