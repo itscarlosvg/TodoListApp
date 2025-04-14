@@ -70,4 +70,17 @@ Join our community of developers creating universal apps.
 
 # 📸 Capturas
 
-![Login Screen](./assets/screenshots/login.png)
+- ## Login Screen
+![Login Screen](./assets/screenshots/Login.png)
+
+- ## Sign-up Screen
+![SignUp Screen](./assets/screenshots/SignUp.png)
+
+- ## Menu
+![Menu](./assets/screenshots/Menu.png)
+
+- ## To-Do List - Light mode
+![ToDoList Screen](./assets/screenshots/TodoListLight.png)
+
+- ## To-Do List - Dark mode
+![ToDoList Screen](./assets/screenshots/TodoListDark.png)
