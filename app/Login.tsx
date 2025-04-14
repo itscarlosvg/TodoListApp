@@ -1,7 +1,7 @@
 import { useRouter } from "expo-router";
 import { View, StyleSheet } from "react-native";
-import { useAuth } from "./src/context/AuthContext";
-import AuthForm from "./src/components/AuthForm"; // <- tu componente
+import { useAuth } from "../app/src/context/AuthContext";
+import AuthForm from "../app/src/components/AuthForm"; // <- tu componente
 
 export default function LoginScreen() {
   const router = useRouter();
@@ -10,7 +10,7 @@ export default function LoginScreen() {
   const handleLogin = (email: string, password: string) => {
     // Aquí podrías validar credenciales reales
     login(); // Cambia estado de autenticado
-    router.replace("/(drawer)/home"); // Redirige al Home
+    router.replace("/(drawer)/Home"); // Redirige al Home
   };
 
   return (

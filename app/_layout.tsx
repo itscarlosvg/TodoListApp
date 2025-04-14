@@ -1,59 +1,58 @@
-import { AuthProvider } from './src/context/AuthContext';
-import '~/global.css';
-import { Theme, ThemeProvider, DefaultTheme, DarkTheme } from '@react-navigation/native';
-import { Slot } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import * as React from 'react';
-import { Platform } from 'react-native';
-import { NAV_THEME } from '~/lib/constants';
-import { useColorScheme } from '~/lib/useColorScheme';
+import { AuthProvider } from "./src/context/AuthContext";
+import {
+  ThemeProvider as AppThemeProvider,
+  useTheme,
+} from "./src/context/ThemeContext";
+import "~/global.css";
+import {
+  ThemeProvider as NavigationThemeProvider,
+  DefaultTheme,
+  DarkTheme,
+} from "@react-navigation/native";
+import { Slot } from "expo-router";
+import { StatusBar } from "expo-status-bar";
+import * as React from "react";
+import { Platform } from "react-native";
+import { NAV_THEME } from "~/lib/constants";
 
-const LIGHT_THEME: Theme = {
+const LIGHT_THEME = {
   ...DefaultTheme,
   colors: NAV_THEME.light,
 };
-const DARK_THEME: Theme = {
+const DARK_THEME = {
   ...DarkTheme,
   colors: NAV_THEME.dark,
 };
 
-export {
-  // Catch any errors thrown by the Layout component.
-  ErrorBoundary,
-} from 'expo-router';
+export { ErrorBoundary } from "expo-router";
 
 export default function RootLayout() {
-  const hasMounted = React.useRef(false);
-  const { colorScheme, isDarkColorScheme } = useColorScheme();
-  const [isColorSchemeLoaded, setIsColorSchemeLoaded] = React.useState(false);
-
-  useIsomorphicLayoutEffect(() => {
-    if (hasMounted.current) {
-      return;
-    }
-
-    if (Platform.OS === 'web') {
-      // Adds the background color to the html element to prevent white background on overscroll.
-      document.documentElement.classList.add('bg-background');
-    }
-    setIsColorSchemeLoaded(true);
-    hasMounted.current = true;
-  }, []);
-
-  if (!isColorSchemeLoaded) {
-    return null;
-  }
-
   return (
-    <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
-      <StatusBar style={isDarkColorScheme ? 'light' : 'dark'} />
-      <AuthProvider>
-        <Slot />
-      </AuthProvider>
-    </ThemeProvider>
+    <AppThemeProvider>
+      {" "}
+      {/* <<-- AQUI envuelves tu app */}
+      <ThemeWrapper />
+    </AppThemeProvider>
   );
 }
 
-const useIsomorphicLayoutEffect =
-  Platform.OS === 'web' && typeof window === 'undefined' ? React.useEffect : React.useLayoutEffect;
+function ThemeWrapper() {
+  const { theme } = useTheme(); // <-- Usas el theme de tu contexto
 
+  const isDark = theme === "dark";
+
+  React.useEffect(() => {
+    if (Platform.OS === "web") {
+      document.documentElement.classList.add("bg-background");
+    }
+  }, []);
+
+  return (
+    <NavigationThemeProvider value={isDark ? DARK_THEME : LIGHT_THEME}>
+      <StatusBar style={isDark ? "light" : "dark"} />
+      <AuthProvider>
+        <Slot />
+      </AuthProvider>
+    </NavigationThemeProvider>
+  );
+}

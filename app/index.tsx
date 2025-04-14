@@ -1,4 +1,5 @@
 // app/index.tsx
+import "../global.css";
 import { useEffect, useState } from "react";
 import { useRouter, useRootNavigationState } from "expo-router";
 import { ActivityIndicator, View } from "react-native";
